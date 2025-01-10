@@ -23,25 +23,25 @@
 </div>
 
 <script>
-    function sendMessage() {
-        const message = document.getElementById('userMessage').value;
-        if (message.trim()) {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.innerHTML += `<div class="message user">${message}</div>`;
-            document.getElementById('userMessage').value = '';
-            
-            fetch('chatbot.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: message })
-            })
-            .then(response => response.json())
-            .then(data => {
-                chatBox.innerHTML += `<div class="message ai">${data.reply}</div>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-        }
+function sendMessage() {
+    const message = document.getElementById('userMessage').value;
+    if (message.trim()) {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML += `<div class="message user">${message}</div>`;
+        document.getElementById('userMessage').value = '';
+        
+        fetch('https://aigirlfriend.tiiny.io/chatbot.php', {  // Updated URL
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            chatBox.innerHTML += `<div class="message ai">${data.reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
     }
+}
 </script>
 
 </body>
